@@ -1,6 +1,6 @@
 `include "quadra.vh"
 
-module square
+module mul
 (
     input  x2_fxd_t x2,
     output sq_fxd_t sq

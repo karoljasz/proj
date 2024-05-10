@@ -2,10 +2,10 @@
 
 module lut
 (
-    input  x1_t  x1,
-    output a_t   a,
-    output b_t   b,
-    output c_t   c
+    input  x1_fxd_t  x1,
+    output a_fxd_t   a,
+    output b_fxd_t   b,
+    output c_fxd_t   c
 );
     // Read coefficients:
     always_comb
