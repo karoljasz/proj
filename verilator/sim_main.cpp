@@ -201,8 +201,8 @@ void testQuadra
 
     // Test params:
 //  uint32_t x_start = 0x000000; // 0.0
-    uint32_t x_start = 0xfffff0;
-    uint32_t x_stop  = 0xffffff; // 1.999...
+    uint32_t x_start = 0xabcde0;
+    uint32_t x_stop  = 0xabcdef; // 1.999...
     uint32_t x_step  = 0x000001; // exhaustive test
 //  uint32_t x_step  = 0x000001; // sparse test
 
@@ -217,6 +217,9 @@ void testQuadra
 
         top->x    = x; // set input x to f(x)
         top->x_dv = 1; // assert data valid
+        
+        atPosEdgeClk(top, contextp, trace_fp);
+        atPosEdgeClk(top, contextp, trace_fp);
 
         atPosEdgeClk(top, contextp, trace_fp);
         clock_cntr++;

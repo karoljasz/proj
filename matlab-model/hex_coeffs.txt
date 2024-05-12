@@ -1,0 +1,6 @@
+error: strtrim: S argument must be a string or cellstring
+error: called from
+    strtrim at line 79 column 5
+    __print_parse_opts__ at line 92 column 9
+    print at line 415 column 8
+    print_coeffs at line 55 column 5
