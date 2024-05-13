@@ -8,6 +8,10 @@
 #include <iomanip>
 #include <deque>
 
+#define A_F_gcc 22
+#define B_F_gcc 19
+#define C_F_gcc 12
+
 #include "Quadra.hpp" // C++ model (reference)
 
 #include "verilated.h" // Verilated RTL
@@ -204,6 +208,7 @@ void testQuadra
 
     // Test params:
 //  uint32_t x_start = 0x000000; // 0.0
+    //uint32_t x_start = 0x97fff0;
     uint32_t x_start = 0x000000;
     uint32_t x_stop  = 0xffffff; // 1.999...
     uint32_t x_step  = 0x000001; // exhaustive test

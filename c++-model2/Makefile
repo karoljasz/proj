@@ -19,9 +19,9 @@ DEFS  =
 
 #EFS    += -DEN_DEBUG       # enable printing of debug information
 
-A_F_make = 28
-B_F_make = 28
-C_F_make = 28
+A_F_make = 22
+B_F_make = 19
+C_F_make = 12
 
 # Gnu C compiler:
 CC       = gcc

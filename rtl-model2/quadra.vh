@@ -47,7 +47,7 @@ typedef  logic unsigned [X2_W-1:0] x2_fxd_t; // u0.17
 // Coefficients:
 // a:
 localparam int A_I =  2;  // <optimize>
-localparam int A_F = 28;  // <optimize>
+localparam int A_F = 22;  // <optimize>
 localparam int A_W = A_I + A_F;
 
 typedef logic unsigned [A_W-1:0] a_int_t;
@@ -55,7 +55,7 @@ typedef logic unsigned [A_W-1:0] a_fxd_t;
 
 // b:
 localparam int B_I =  2;  // <optimize>
-localparam int B_F = 28;  // <optimize>
+localparam int B_F = 19;  // <optimize>
 localparam int B_W = B_I + B_F;
 
 typedef logic unsigned [B_W-1:0] b_int_t;
@@ -63,7 +63,7 @@ typedef logic unsigned [B_W-1:0] b_fxd_t;
 
 // c:
 localparam int C_I =  2;  // <optimize>
-localparam int C_F = 28;  // <optimize>
+localparam int C_F = 12;  // <optimize>
 localparam int C_W = C_I + C_F;
 
 typedef logic unsigned [C_W-1:0] c_int_t;
@@ -86,7 +86,7 @@ typedef logic unsigned [2*X2_W-1:0] sq_res_t;
 typedef logic unsigned [SQ_W-1:0] sq_fxd_t; // sq = x2 * x2
 
 localparam int T0_I =  A_I;
-localparam int T0_F =  S_F;
+localparam int T0_F =  A_F;
 localparam int T0_W = T0_I + T0_F;
 
 typedef logic unsigned [T0_W-1:0] t0_fxd_t; // t0 = a
@@ -109,7 +109,7 @@ typedef logic unsigned [T2_W-1:0] t2_fxd_t; // t2 = c * x2^2
 typedef logic unsigned [T2_W+1-1:0] s_res_t; // t1 = b * x2
 
 localparam int SQ_I = 0;
-localparam int SQ_F = 17;
+localparam int SQ_F = 24;
 localparam int SQ_W = SQ_I + SQ_F;
 
 `endif
