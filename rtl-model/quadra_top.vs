@@ -26,6 +26,8 @@ module quadra_top
     t1_res_temp_t t1_res_temp;
     t2_res_t t2_res;
     
+    logic round;
+    
     
     t1_fxd_t x2_to_t1, b_to_t1;
     t2_fxd_t c_to_t1, sq_to_t1;
@@ -71,24 +73,34 @@ module quadra_top
 
     always_comb 
     begin
-        t0_fxd_d = ((a_fxd_q) >> (A_W - T0_W));
-        //t0_fxd_d = 0;
+        t0_fxd_d = ((a_fxd_q) >> (A_F - T0_F));
+        //t0_fxd_d = {(a_fxd_q), {(T0_F - A_F){1'b0}}};
         
         x2_to_t1 = {x2_int_q_q, {R_F{1'b0}}};
-        b_to_t1 = ((b_fxd_q) >> (B_W - T1_W));
+        b_to_t1 = ((b_fxd_q) >> (B_F - T1_F));
+        //b_to_t1 = {(b_fxd_q), {(T1_F - B_F){1'b0}}};
         
-        c_to_t1 = ((c_fxd_q) >> (C_W - T2_W));
-        sq_to_t1 = sq_fxd_q >> 9;
+        c_to_t1 = ((c_fxd_q) >> (C_F - T2_F));
+        //c_to_t1 = {(c_fxd_q), {(T2_F - C_F){1'b0}}};
+        //sq_to_t1 = sq_fxd_q >> (Y_F-R_F-(2*X2_W - SQ_W));
+        sq_to_t1 = {sq_fxd_q >> (Y_F-1-(2*X2_W - SQ_W)), {4{1'b0}}};
+        //t0_fxd_d = sq_to_t1;
 
 	t0_to_s = t0_fxd_q;
 	t1_to_s = t1_fxd_q;
 	t2_to_s = t2_fxd_q;
 	s_res = t0_to_s + t1_to_s + t2_to_s;
+	//$display("here 0x%0h", {t0_fxd_q, 1'b0});
+	//$display("here 0x%0h", {t1_fxd_q, 1'b0});
+	//$display("here 0x%0h", {t2_fxd_q, 1'b0});
+	//$display("here 0x%0h", s_res);
+	//s_res = t0_fxd_q;
+	round = s_res[R_F];
+        //s_fxd_d = {s_res[S_W-1 : R_F+1], round};
         s_fxd_d = s_res[S_W-1 : R_F];
+        y_dv = dv_p2;
+        y    = s_fxd_d;
     end
 
-    // Outputs:
-    always_comb y_dv = dv_p2;
-    always_comb y    = s_fxd_d;
 
 endmodule

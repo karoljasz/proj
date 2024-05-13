@@ -131,15 +131,18 @@ inline void checkOutput
 {
     using namespace std;
 
-    x_fxd_t x_fxd = lat_fifo.front();
-                    lat_fifo.pop_front();
-
-    // cast input to double:
-    double  x_dbl      = x_fxd.to_double();
-
     // get RTL output:
     y_int_t y_rtl_int  = top->y;
     dv_t    y_rtl_dv   = top->y_dv;
+    
+    x_fxd_t x_fxd = lat_fifo.front();
+    if(y_rtl_dv)
+    {
+                    lat_fifo.pop_front();
+    }
+
+    // cast input to double:
+    double  x_dbl      = x_fxd.to_double();
 
     // convert to fixed:
     y_fxd_t y_rtl_fxd  = 0; y_rtl_fxd.set_slc(0, y_rtl_int);
@@ -171,7 +174,7 @@ inline void checkOutput
     // Enable echoing of results:
     bool     echo_en    = y_rtl_dv && (!in_spec || !match_ok);
 
-    const int SP_PREC  = 12;
+    const int SP_PREC  = 20;
     const int SP_WIDTH = SP_PREC + 8;
 
     if (echo_en)
@@ -179,10 +182,10 @@ inline void checkOutput
         cout << "  ";
         cout << dec << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << x_dbl     << "   "
              << dec << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_ref_dbl << "   "
-             << dec << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_cpp_dbl << "  ["
+             << hex << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_cpp_fxd << "  ["
              << dec << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_cpp_err << "]  "
              << ((match_ok) ? " ==" : " !=")
-             << dec << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_rtl_dbl << "  ["
+             << hex << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_rtl_fxd << "  ["
              << dec << scientific << setw(SP_WIDTH) << setprecision(SP_PREC) << right << y_rtl_err << "]  "
              << endl;
     }
@@ -209,6 +212,7 @@ void testQuadra
     // Main simulation loop:
     for (uint32_t x = x_start; x <= x_stop; x += x_step)
     {
+        
         x_int_t x_int = x;
         x_fxd_t x_fxd = 0; // (u1.23)
         x_fxd.set_slc(0, x_int);
@@ -217,9 +221,6 @@ void testQuadra
 
         top->x    = x; // set input x to f(x)
         top->x_dv = 1; // assert data valid
-        
-        atPosEdgeClk(top, contextp, trace_fp);
-        atPosEdgeClk(top, contextp, trace_fp);
 
         atPosEdgeClk(top, contextp, trace_fp);
         clock_cntr++;

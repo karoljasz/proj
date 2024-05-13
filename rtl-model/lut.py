@@ -15,23 +15,26 @@ for line in lut_lines:
         for line_values in values_lines:
     	    line_split = line_values.split()
     	    text += "        7'h"
-    	    hex_to_string = "'h" + str(hex(int(line_split[1], 0)))[2:]
+    	    hex_to_string = int(line_split[1], 0)
+    	    hex_to_string = ((hex_to_string))
     	    bin_to_string = str(hex(int(line_split[0])))[2:]
-    	    text += f"{bin_to_string} : a = {hex_to_string};\n"
+    	    text += f"{bin_to_string} : a = 'h{str(hex(hex_to_string))[2:]};\n"
     if "begin b" in line:
         for line_values in values_lines:
     	    line_split = line_values.split()
     	    text += "        7'h"
-    	    hex_to_string = "'h" + str(hex(int(line_split[2], 0)))[2:]
+    	    hex_to_string = int(line_split[2], 0)
+    	    hex_to_string = ((hex_to_string))
     	    bin_to_string = str(hex(int(line_split[0])))[2:]
-    	    text += f"{bin_to_string} : b = {hex_to_string};\n"
+    	    text += f"{bin_to_string} : b = 'h{str(hex(hex_to_string))[2:]};\n"
     if "begin c" in line:
         for line_values in values_lines:
     	    line_split = line_values.split()
     	    text += "        7'h"
-    	    hex_to_string = "'h" + str(hex(int(line_split[3], 0)))[2:]
+    	    hex_to_string = int(line_split[3], 0)
+    	    hex_to_string = ((hex_to_string))
     	    bin_to_string = str(hex(int(line_split[0])))[2:]
-    	    text += f"{bin_to_string} : c = {hex_to_string};\n"
+    	    text += f"{bin_to_string} : c = 'h{str(hex(hex_to_string))[2:]};\n"
 file_lut.close()
 
 file_lut = open("lut.vs","w")

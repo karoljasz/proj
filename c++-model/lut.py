@@ -1,4 +1,4 @@
-file_values = open("coeffs.txt","r")
+file_values = open("hex_coeffs.txt","r")
 values_temp = file_values.readlines()
 values_lines = values_temp[1:]
 file_values.close()

@@ -19,7 +19,7 @@ module mul
     	res = x1_sign * x2_sign;
     	res_sign = sign ? (~res + 'b1) : (res);
     	res_final = {sign, res_sign};
-    	y = res_final >> (T1_W-4);
+    	y = res_final >> (T1_F);
     end
 
 endmodule    

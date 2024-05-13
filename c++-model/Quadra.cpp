@@ -12,6 +12,7 @@
 #include "Quadra.hpp"
 
 #include "CoeffTable.hpp"
+#include "CoeffTable2.hpp"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ y_fxd_t approxDouble (const x_fxd_t & x_fxd)
 
     if constexpr (DBG_OUT) {
         cout << "x_fxd  = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
              << x_fxd.to_double() << endl;
     }
 
@@ -47,10 +48,10 @@ y_fxd_t approxDouble (const x_fxd_t & x_fxd)
 
     if constexpr (DBG_OUT) {
         cout << "x1_fxd = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
              << x1_fxd.to_double() << endl;
         cout << "x2_fxd = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
              << x2_fxd.to_double() << endl;
     }
 
@@ -128,8 +129,8 @@ y_fxd_t approxDouble (const x_fxd_t & x_fxd)
 
     if constexpr (DBG_OUT) {
         cout << "y_fxd  = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             << y_fxd.to_double() << endl;
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << y_fxd << endl;
     }
 
     return y_fxd;
@@ -144,8 +145,8 @@ y_fxd_t approxFixed (const x_fxd_t & x_fxd)
 
     if constexpr (DBG_OUT) {
         cout << "x_fxd  = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             << x_fxd.to_double() << endl;
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << x_fxd << endl;
     }
 
     // Break up into LUT index and delta:
@@ -167,19 +168,19 @@ y_fxd_t approxFixed (const x_fxd_t & x_fxd)
 
     if constexpr (DBG_OUT) {
         cout << "x1_fxd = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             << x1_fxd.to_double() << endl;
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << x1_fxd << endl;
         cout << "x2_fxd = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             << x2_fxd.to_double() << endl;
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << x2_fxd << endl;
     }
 
     // Square:
     sq_fxd_t sq_fxd = x2_fxd * x2_fxd; // x2 * x2
 
     if constexpr (DBG_OUT) {
-        cout << "sq_fxd = " << dec << fixed << setw(WIDTH) << setprecision(PREC) << right
-             <<  sq_fxd.to_double() << endl;
+        cout << "sq_fxd = " << hex<< fixed << setw(WIDTH) << setprecision(PREC) << right
+             <<  sq_fxd << endl;
     }
 
     // Table index:
@@ -191,7 +192,7 @@ y_fxd_t approxFixed (const x_fxd_t & x_fxd)
              << index.to_int() << endl;
     }
 
-    // Double coefficients:
+    // Double coefficients:    
     double a_dbl = CoeffTable[index][1];
     double b_dbl = CoeffTable[index][2];
     double c_dbl = CoeffTable[index][3];
@@ -204,16 +205,16 @@ y_fxd_t approxFixed (const x_fxd_t & x_fxd)
     if constexpr (DBG_OUT) {
         cout << "a_dbl  = "   << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
              <<  a_dbl << endl;
-        cout << "a_fxd  = "   << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             <<  a_fxd.to_double() << endl;
+        cout << "a_fxd  = "   << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             <<  a_fxd << endl;
         cout << "b_dbl  = "   << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
              <<  b_dbl << endl;
-        cout << "b_fxd  = "   << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             <<  b_fxd.to_double() << endl;
+        cout << "b_fxd  = "   << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             <<  b_fxd << endl;
         cout << "c_dbl  = "   << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
              <<  c_dbl << endl;
-        cout << "c_fxd  = "   << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             <<  c_fxd.to_double() << endl;
+        cout << "c_fxd  = "   << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             <<  c_fxd << endl;
     }
 
     // Calculate quadratic polynomial:
@@ -222,20 +223,20 @@ y_fxd_t approxFixed (const x_fxd_t & x_fxd)
     t2_fxd_t t2_fxd =  c_fxd * sq_fxd; //  c * x2^2
 
     if constexpr (DBG_OUT) {
-        cout << "t0_fxd = " << dec << fixed << setw(WIDTH) << setprecision(PREC) << right
-             << t0_fxd.to_double() << endl;
-        cout << "t1_fxd = " << dec << fixed << setw(WIDTH) << setprecision(PREC) << right
-             << t1_fxd.to_double() << endl;
-        cout << "t2_fxd = " << dec << fixed << setw(WIDTH) << setprecision(PREC) << right
-             << t2_fxd.to_double() << endl;
+        cout << "t0_fxd = " << hex << fixed << setw(WIDTH) << setprecision(PREC) << right
+             << t0_fxd << endl;
+        cout << "t1_fxd = " << hex << fixed << setw(WIDTH) << setprecision(PREC) << right
+             << t1_fxd << endl;
+        cout << "t2_fxd = " << hex << fixed << setw(WIDTH) << setprecision(PREC) << right
+             << t2_fxd << endl;
     }
 
     // 3-way addition:
     s_fxd_t s_fxd = t0_fxd + t1_fxd + t2_fxd;
 
     if constexpr (DBG_OUT) {
-        cout << "s_fxd  = " << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             << s_fxd.to_double() << endl;
+        cout << "s_fxd  = " << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << s_fxd << endl;
     }
     
     // Round:
@@ -246,8 +247,8 @@ y_fxd_t approxFixed (const x_fxd_t & x_fxd)
 
     if constexpr (DBG_OUT) {
         cout << "y_fxd  = "
-             << dec << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
-             << y_fxd.to_double() << endl;
+             << hex << fixed << setw(WIDTH) << setprecision(PREC) << setfill(' ') << right
+             << y_fxd << endl;
     }
 
     return y_fxd;

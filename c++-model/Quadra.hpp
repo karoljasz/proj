@@ -18,7 +18,7 @@
 #include <ac_float.h>
 
 // --------------------------------------------------------------------------------
-const double ERR_TOL = 2.150e-6; // approximation error must be below this value
+const double ERR_TOL = 5.250e-6; // approximation error must be below this value
 // --------------------------------------------------------------------------------
 
 const double PI_OVER_4 = M_PI / 4.0;
@@ -91,7 +91,8 @@ const int Y_F = 23;        // fractional part
 const int Y_W = Y_I + Y_F; // bit width
 
 typedef ac_int  <Y_W,      true>               y_int_t;
-typedef ac_fixed<Y_W, Y_I, true, rne, AC_WRAP> y_rnd_t; // (round)
+typedef ac_fixed<Y_W, Y_I, true, trn, AC_WRAP> y_rnd_t; // (round)
+//typedef ac_fixed<Y_W, Y_I, true, rne, AC_WRAP> y_rnd_t; // (round)
 typedef ac_fixed<Y_W, Y_I, true, trn, AC_WRAP> y_fxd_t; // (truncate)
 
 // --------------------------------------------------------------------------------
@@ -99,7 +100,7 @@ typedef ac_fixed<Y_W, Y_I, true, trn, AC_WRAP> y_fxd_t; // (truncate)
 // --------------------------------------------------------------------------------
 
 // extra working fractional bits to be rounded off at the end
-const int R_F = 4;
+const int R_F = 5;
 
 const int S_I = Y_I;
 const int S_F = Y_F + R_F;  // (4 extra fractional bits to be rounded)

@@ -70,19 +70,17 @@ typedef logic unsigned [C_W-1:0] c_int_t;
 typedef logic unsigned [C_W-1:0] c_fxd_t;
 
 // extra working fractional bits to be rounded off at the end
-localparam int R_F = 4;
+//localparam int R_F = 0;
+localparam int R_F = 5;
 
 localparam int S_I = A_I;
 localparam int S_F = Y_F + R_F;  // (4 extra fractional bits to be rounded)
+//localparam int S_F = 28;  // (4 extra fractional bits to be rounded)
 localparam int S_W = S_I + S_F;
 
 typedef logic unsigned [S_W-1:0] s_fxd_t; // s = t0 + t1 + t2
 
 // Polynomial calculation:
-
-localparam int SQ_I = X2_I + X2_I;
-localparam int SQ_F = 24;
-localparam int SQ_W = SQ_I + SQ_F;
 
 typedef logic unsigned [2*X2_W-1:0] sq_res_t;
 typedef logic unsigned [SQ_W-1:0] sq_fxd_t; // sq = x2 * x2
@@ -109,5 +107,9 @@ typedef logic unsigned [T2_W+T2_W-1:0] t2_res_t; // t1 = b * x2
 typedef logic unsigned [T2_W-1:0] t2_fxd_t; // t2 = c * x2^2
 
 typedef logic unsigned [T2_W+1-1:0] s_res_t; // t1 = b * x2
+
+localparam int SQ_I = 0;
+localparam int SQ_F = 17;
+localparam int SQ_W = SQ_I + SQ_F;
 
 `endif
