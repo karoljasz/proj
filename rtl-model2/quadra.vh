@@ -109,7 +109,7 @@ typedef logic unsigned [T2_W-1:0] t2_fxd_t; // t2 = c * x2^2
 typedef logic unsigned [T2_W+1-1:0] s_res_t; // t1 = b * x2
 
 localparam int SQ_I = 0;
-localparam int SQ_F = 24;
+localparam int SQ_F = 15;
 localparam int SQ_W = SQ_I + SQ_F;
 
 `endif
